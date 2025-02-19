@@ -10,19 +10,20 @@ import AddCar from "../Pages/AddCar/AddCar";
 import MyCars from "../Pages/MyCars/MyCars";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import PrivateRouter from "./PrivateRouter";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout></MainLayout>,
-        errorElement: <h2>Page Not Found</h2>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
                 element: <Home></Home>
             },
             {
-                path: 'availableCar',
+                path: 'availableCars',
                 element: <AvailableCars></AvailableCars>
             },
             {

@@ -1,9 +1,18 @@
+import Banner from "./Banner";
+import ChooseUs from "./ChooseUs";
+import RecentListing from "./RecentListing";
+import SpecialOffer from "./SpecialOffer";
+
 
 const Home = () => {
     return (
         <div>
-            This Is Home
+            <Banner></Banner>
+            <ChooseUs></ChooseUs>
+            <RecentListing></RecentListing>
+            <SpecialOffer></SpecialOffer>
         </div>
+
     );
 };
 
