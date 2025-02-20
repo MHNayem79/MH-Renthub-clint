@@ -17,8 +17,8 @@ const RecentListing = () => {
                 <p className="text-2xl text-gray-600 mb-12">Check out the latest cars added to our platform.</p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
-                    {recentCars.map((car) => (
-                        <div key={car.id} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    {recentCars.map((car,index) => (
+                        <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
                             <img src={car.image} alt={car.model} className="w-full h-52 object-cover" />
                             <div className="p-6">
                                 <h3 className="text-xl font-semibold mb-2">{car.model}</h3>

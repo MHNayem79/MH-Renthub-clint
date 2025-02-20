@@ -6,13 +6,13 @@ const Footer = () => {
         <footer className="footer grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 justify-around bg-base-200 text-base-content p-10">
             <aside>
                 <img src={logo} alt="MH LOGO" />
-                <p>
+                <div>
                     MH Renthub
                     <br />
                     Providing reliable tech since 2001
                     <br />
                     <p>© {new Date().getFullYear()} MH Renthub. All rights reserved.</p>
-                </p>
+                </div>
             </aside>
             <nav>
                 <h6 className="footer-title">Services</h6>

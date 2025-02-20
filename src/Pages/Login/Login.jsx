@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../Context/AuthContext/AuthContext";
 import Swal from "sweetalert2";
 
@@ -7,8 +7,26 @@ import Swal from "sweetalert2";
 const Login = () => {
     const { googleVerify, signInUser } = useContext(AuthContext)
     const navigate = useNavigate();
-    const handleGoogleRegister = () => {
-        googleVerify()
+    const location=useLocation();
+    console.log('sign in ',location)
+    const from=location.state||'/';
+    const handleGoogleRegister = async () => {
+        try {
+            const user = await googleVerify()
+            if (user) {
+                navigate(from);
+            }
+        } catch (error) {
+            console.error('google sign in error', error)
+            if (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `${error.message}`,
+                });
+            }
+
+        }
     }
     const handleLogin = e => {
         e.preventDefault();
@@ -26,7 +44,7 @@ const Login = () => {
                         draggable: true
                     });
                 }
-                navigate('/')
+                navigate(from)
             })
             .catch(error => {
                 console.log("ERROR", error.message)

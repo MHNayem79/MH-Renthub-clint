@@ -7,8 +7,24 @@ import Swal from "sweetalert2";
 const Register = () => {
     const { createUser, googleVerify } = useContext(AuthContext)
     const navigate = useNavigate()
-    const handleGoogleRegister = () => {
-        googleVerify()
+
+    const handleGoogleRegister = async () => {
+        try {
+            const user = await googleVerify()
+            if (user) {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error('google sign in error', error)
+            if (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `${error.message}`,
+                });
+            }
+
+        }
     }
     const handleRegister = e => {
         e.preventDefault();

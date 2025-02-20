@@ -1,24 +1,43 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import AuthContext from "../../Context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const AddCar = () => {
-    const navigate = useNavigate();
-
+    const { user } = useContext(AuthContext)
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const model = form.model.value;
         const price = form.price.value;
-        const availability = form.availability.value;
-        const registrationNumber = form.registrationNumber.value;
+        const available = form.availability.value;
+        const registration_number = form.registrationNumber.value;
         const features = form.features.value;
         const description = form.description.value;
-        const bookingCount = form.bookingCount.value;
-        const imageUrl = form.imageUrl.value;
+        const booking_count = form.bookingCount.value;
+        const image = form.imageUrl.value;
         const location = form.location.value;
-        const newCar = (model, price, availability, registrationNumber, features, description, bookingCount, imageUrl, location);
+        const carAdder = user.email;
+        const datePosted = form.datePosted.value;
+        const newCar = { model, price, available, registration_number, features, description, booking_count, image, location, carAdder, datePosted };
         console.log(newCar)
+        fetch('http://localhost:5000/allCars', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(newCar)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: "Car Added Successfully!",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+            })
     }
     return (
         <div className="py-16">
@@ -35,7 +54,7 @@ const AddCar = () => {
                 <div>
                     <label className="block text-white font-medium">Daily Rental Price ($)</label>
                     <input
-                        type="number" name="price"
+                        type="text" name="price"
                         placeholder="Enter price per day" required className="w-full p-2 border rounded"
                     />
                 </div>
@@ -98,6 +117,13 @@ const AddCar = () => {
                         placeholder="City, Country" required className="w-full p-2 border rounded"
                     />
                 </div>
+                <div>
+                    <label className="block text-white font-medium">Date of Post</label>
+                    <input
+                        type="date" name="datePosted"
+                        placeholder="Date of Post" required className="w-full p-2 border rounded"
+                    />
+                </div>
 
                 <button
                     type="submit"
@@ -112,3 +138,25 @@ const AddCar = () => {
 };
 
 export default AddCar;
+
+// [
+//     {
+//         "image": "https://i.ibb.co.com/FkzsVGqb/MY23-OBK-Touring-m-PDG-OP41-Magnetite-Gray-Metallic.png",
+//         "model": "Toyota RAV4 2023",
+//         "price": "$65/day",
+//         "available": true,
+//         "booking_count": 14,
+//         "datePosted": "Added 2 days ago",
+//         "registration_number": "RAV-5672",
+//         "features": ["GPS", "AC", "All-Wheel Drive"],
+//         "description": "A compact SUV with excellent fuel efficiency and reliability.",
+//         "location": "Portland, OR"
+//     },
+// ]
+
+// https://i.ibb.co.com/yFKZ17Bv/download.jpg
+// https://i.ibb.co.com/WNrQRf90/2021-hyundai-sonata-sedan-limited-fq-oem-1-815.jpg
+
+
+
+
