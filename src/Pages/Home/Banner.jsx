@@ -4,7 +4,7 @@ import banner from '../../assets/banner/banner.jpg'
 
 const Banner = () => {
     return (
-        <div className='relative'>
+        <section className='relative'>
             <img className='w-full md:h-[700px] md:object-cover my-4' src={banner} alt="Banner img" />
             <div className='absolute inset-0 bg-black opacity-40 flex items-center justify-center'>
                 <div className=' text-center text-white px-10 py-10 '>
@@ -13,7 +13,7 @@ const Banner = () => {
                 </div>
             </div>
 
-        </div>
+        </section>
     );
 };
 

@@ -33,17 +33,21 @@ const SpecialOffer = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, ease: "easeOut" }}
                             whileHover={{ scale: 1.05 }}
+                            className="relative bg-cover bg-center bg-no-repeat rounded-lg h-96 w-full"
+                            style={{ backgroundImage: `url(${offer.bgImage})` }}
                         >
-                            <img className="relative bg-cover bg-center rounded-lg shadow-lg overflow-hidden" src={offer.bgImage} alt="" />
-                            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center p-6 text-white">
-                                <h3 className="text-2xl font-bold mb-2">{offer.title}</h3>
-                                <p className="text-lg mb-4">{offer.description}</p>
-                                <NavLink
-                                    to="/special-offers"
-                                    className="bg-white text-black px-6 py-2 rounded-lg shadow-lg hover:bg-amber-500 transition duration-300"
-                                >
-                                    Learn More
-                                </NavLink>
+                            <div>
+
+
+                                <div className="absolute inset-0 bg-black opacity-70 flex flex-col justify-center items-center p-6 text-white">
+                                    <h3 className="text-2xl font-bold mb-2">{offer.title}</h3>
+                                    <p className="text-lg mb-4">{offer.description}</p>
+                                    <button
+                                        className="bg-white text-black px-6 py-2 rounded-lg shadow-lg hover:bg-amber-500 transition duration-300"
+                                    >
+                                        Learn More
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     ))}

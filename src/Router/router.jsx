@@ -11,6 +11,7 @@ import MyCars from "../Pages/MyCars/MyCars";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import PrivateRouter from "./PrivateRouter";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import CarDetails from "../Pages/CarDetails/CarDetails";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
             {
                 path: 'availableCars',
                 element: <AvailableCars></AvailableCars>
+            },
+            {
+                path: 'carDetails/:id',
+                element: <CarDetails></CarDetails>,
+                loader: ({ params }) => fetch(`http://localhost:5000/allCars/${params.id}`)
             },
             {
                 path: 'addCar',
