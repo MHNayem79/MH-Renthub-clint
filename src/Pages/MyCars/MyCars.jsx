@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../Context/AuthContext/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 
 
@@ -58,6 +58,8 @@ const MyCars = () => {
                                 text: "Your Car has been deleted.",
                                 icon: "success"
                             });
+                            const remaining = myCars.filter(car => car._id !== _id)
+                            setMyCars(remaining);
                         }
                     })
             }
@@ -116,12 +118,12 @@ const MyCars = () => {
                                         </td>
                                         <td className="border p-2">{car.datePosted}</td>
                                         <td className="border p-2 flex flex-col gap-3">
-                                            <button
+                                            <NavLink to={`/update/${car._id}`}
                                                 onClick={() => updateCar(car)}
                                                 className="bg-blue-500 text-white px-3 py-1 rounded mr-2 hover:bg-blue-600"
                                             >
                                                 Update
-                                            </button>
+                                            </NavLink>
                                             <button
                                                 onClick={() => handleDeleteCar(car._id)}
                                                 className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"

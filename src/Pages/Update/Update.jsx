@@ -1,10 +1,14 @@
 import { useContext } from "react";
-import AuthContext from "../../Context/AuthContext/AuthContext";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
+import AuthContext from "../../Context/AuthContext/AuthContext";
 
-const AddCar = () => {
+
+const Update = () => {
+    const car = useLoaderData();
+    const { _id, model, price, available, registration_number, features, description, booking_count, image, location, datePosted } = car;
     const { user } = useContext(AuthContext)
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
         const form = e.target;
         const model = form.model.value;
@@ -18,21 +22,21 @@ const AddCar = () => {
         const location = form.location.value;
         const carAdder = user.email;
         const datePosted = form.datePosted.value;
-        const newCar = { model, price, available, registration_number, features, description, booking_count, image, location, carAdder, datePosted };
-        console.log(newCar)
-        fetch('http://localhost:5000/allCars', {
-            method: "POST",
+        const updatedCar = { model, price, available, registration_number, features, description, booking_count, image, location, carAdder, datePosted };
+        console.log(updatedCar)
+        fetch(`http://localhost:5000/myCars/${_id}`, {
+            method: "PUT",
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringify(newCar)
+            body: JSON.stringify(updatedCar)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                if (data.insertedId) {
+                if (data.modifiedCount > 0) {
                     Swal.fire({
-                        title: "Car Added Successfully!",
+                        title: "Car Updated Successfully!",
                         icon: "success",
                         draggable: true
                     });
@@ -41,13 +45,13 @@ const AddCar = () => {
     }
     return (
         <div className="py-16">
-            <h2 className="text-5xl font-semibold text-center mb-6">Add a New Car</h2>
-            <form onSubmit={handleSubmit} className="space-y-1">
+            <h2 className="text-5xl font-semibold text-center mb-6">Update Your Car Info</h2>
+            <form onSubmit={handleUpdate} className="space-y-1">
                 <div>
                     <label className="block text-white font-medium">Car Model</label>
                     <input
                         type="text" name="model"
-                        placeholder="Enter car model" required className="w-full p-2 border rounded"
+                        defaultValue={model} placeholder="Enter car model" required className="w-full p-2 border rounded"
                     />
                 </div>
 
@@ -55,14 +59,14 @@ const AddCar = () => {
                     <label className="block text-white font-medium">Daily Rental Price ($)</label>
                     <input
                         type="text" name="price"
-                        placeholder="Enter price per day" required className="w-full p-2 border rounded"
+                        defaultValue={price} placeholder="Enter price per day" required className="w-full p-2 border rounded"
                     />
                 </div>
 
                 <div>
                     <label className="block text-white font-medium">Availability</label>
                     <select
-                        name="availability" required className="w-full p-2 border rounded"
+                        name="availability" defaultValue={available} required className="w-full p-2 border rounded"
                     >
                         <option value="">Select Availability</option>
                         <option value="true">Available</option>
@@ -74,7 +78,7 @@ const AddCar = () => {
                     <label className="block text-white font-medium">Vehicle Registration Number</label>
                     <input
                         type="text" name="registrationNumber"
-                        placeholder="Enter registration number" required className="w-full p-2 border rounded"
+                        defaultValue={registration_number} placeholder="Enter registration number" required className="w-full p-2 border rounded"
                     />
                 </div>
 
@@ -82,7 +86,7 @@ const AddCar = () => {
                     <label className="block text-white font-medium">Features</label>
                     <input
                         type="text" name="features"
-                        placeholder="e.g., GPS, AC, Sunroof" className="w-full p-2 border rounded"
+                        defaultValue={features} placeholder="e.g., GPS, AC, Sunroof" className="w-full p-2 border rounded"
                     />
                 </div>
 
@@ -90,14 +94,14 @@ const AddCar = () => {
                     <label className="block text-white font-medium">Description</label>
                     <textarea
                         name="description"
-                        placeholder="Enter car description" required className="w-full p-2 border rounded"
+                        defaultValue={description} placeholder="Enter car description" required className="w-full p-2 border rounded"
                     />
                 </div>
 
                 <div>
                     <label className="block text-white font-medium">Booking Count</label>
                     <input
-                        type="number" name="bookingCount" defaultValue="0"
+                        type="number" name="bookingCount" defaultValue={booking_count}
                         placeholder="Default: 0" required className="w-full p-2 border rounded"
                     />
                 </div>
@@ -106,7 +110,7 @@ const AddCar = () => {
                     <label className="block text-white font-medium">Image URL</label>
                     <input
                         type="text" name="imageUrl"
-                        placeholder="Paste image link here" required className="w-full p-2 border rounded"
+                        defaultValue={image} placeholder="Paste image link here" required className="w-full p-2 border rounded"
                     />
                 </div>
 
@@ -114,14 +118,14 @@ const AddCar = () => {
                     <label className="block text-white font-medium">Location</label>
                     <input
                         type="text" name="location"
-                        placeholder="City, Country" required className="w-full p-2 border rounded"
+                        defaultValue={location} placeholder="City, Country" required className="w-full p-2 border rounded"
                     />
                 </div>
                 <div>
                     <label className="block text-white font-medium">Date of Post</label>
                     <input
-                        type="date" name="datePosted" defaultValue={'Added'}
-                        placeholder="Date of Post" required className="w-full p-2 border rounded"
+                        type="date" name="datePosted"
+                        defaultValue={datePosted} placeholder="Date of Post" required className="w-full p-2 border rounded"
                     />
                 </div>
 
@@ -129,7 +133,7 @@ const AddCar = () => {
                     type="submit"
                     className="w-full p-3 bg-amber-500 text-white font-bold rounded hover:bg-amber-600 transition"
                 >
-                    Add Car
+                    Update Car info
                 </button>
             </form>
 
@@ -137,8 +141,4 @@ const AddCar = () => {
     );
 };
 
-export default AddCar;
-
-
-
-
+export default Update;
