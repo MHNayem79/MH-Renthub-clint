@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const CarDetails = () => {
     const { _id, model, price, available, features, image, description } = useLoaderData();
-    const [bookingStatus, setBookingStatus] = useState("");
+    const [bookingStatus] = useState("");
 
     const handleBookNow = async (e) => {
         e.preventDefault();
