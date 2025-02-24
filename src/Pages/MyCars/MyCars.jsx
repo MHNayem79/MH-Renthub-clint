@@ -119,7 +119,6 @@ const MyCars = () => {
                                         <td className="border p-2">{car.datePosted}</td>
                                         <td className="border p-2 flex flex-col gap-3">
                                             <NavLink to={`/update/${car._id}`}
-                                                onClick={() => updateCar(car)}
                                                 className="bg-blue-500 text-white px-3 py-1 rounded mr-2 hover:bg-blue-600"
                                             >
                                                 Update

@@ -25,11 +25,9 @@ const AvailableCars = () => {
         (car.location?.toLowerCase() || "").includes(searchQuery.toLowerCase())
     );
 
-    // Sort cars based on the selected sort type
     const sortedCars = filteredCars.sort((a, b) => {
-        // Convert price to number if it's a string
-        const priceA = parseFloat(a.price.replace(/[^\d.-]/g, '')); // Remove any non-numeric characters
-        const priceB = parseFloat(b.price.replace(/[^\d.-]/g, ''));
+        const priceA = a.price ? parseFloat(String(a.price).replace(/[^\d.-]/g, '')) : 0;
+        const priceB = b.price ? parseFloat(String(b.price).replace(/[^\d.-]/g, '')) : 0;
 
         if (sortType === "price-lowest") {
             return priceA - priceB;
@@ -37,7 +35,7 @@ const AvailableCars = () => {
         if (sortType === "price-highest") {
             return priceB - priceA;
         }
-        return 0; // No sorting if no sort type is selected
+        return 0;
     });
 
     return (

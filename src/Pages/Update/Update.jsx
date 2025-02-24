@@ -1,11 +1,12 @@
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import AuthContext from "../../Context/AuthContext/AuthContext";
 
 
 const Update = () => {
     const car = useLoaderData();
+    const navigate=useNavigate();
     const { _id, model, price, available, registration_number, features, description, booking_count, image, location, datePosted } = car;
     const { user } = useContext(AuthContext)
     const handleUpdate = (e) => {
@@ -41,6 +42,7 @@ const Update = () => {
                         draggable: true
                     });
                 }
+                navigate('/myCars')
             })
     }
     return (
