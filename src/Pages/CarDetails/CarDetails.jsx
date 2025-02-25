@@ -1,15 +1,18 @@
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
+import AuthContext from "../../Context/AuthContext/AuthContext";
 
 const CarDetails = () => {
     const { _id, model, price, available, features, image, description } = useLoaderData();
     const [bookingStatus] = useState("");
+    const { user } = useContext(AuthContext);
 
     const handleBookNow = async (e) => {
         e.preventDefault();
         const form = e.target;
         const bookingDate = form.bookingDate.value;
+        const email = user.email;
 
         // Booking data object
         const bookingData = {
@@ -19,6 +22,7 @@ const CarDetails = () => {
             bookingDate,
             price: price,
             status: "Pending", // Default status
+            bookingMaker:email
         };
         console.log(bookingData)
         fetch('http://localhost:5000/myBookings', {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import { SlCalender } from "react-icons/sl";
 import Swal from "sweetalert2";
@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // Import Chart.js and react-chartjs-2
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import AuthContext from "../../Context/AuthContext/AuthContext";
 
 // Register chart elements
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -15,14 +16,15 @@ const MyBookings = () => {
     const [bookings, setBookings] = useState([]);
     const [selectedBooking, setSelectedBooking] = useState(null);
     const [startDate, setStartDate] = useState(new Date());
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        fetch("http://localhost:5000/myBookings")
+        fetch(`http://localhost:5000/myBookings?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setBookings(data);
             });
-    }, []);
+    }, [user.email]);
 
     // ✅ Cancel Booking Logic
     const handleCancel = (bookingId) => {
