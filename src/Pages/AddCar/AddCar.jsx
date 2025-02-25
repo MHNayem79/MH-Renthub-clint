@@ -19,7 +19,7 @@ const AddCar = () => {
         const carAdder = user.email;
         const datePosted = form.datePosted.value;
         const newCar = { model, price, available, registration_number, features, description, booking_count, image, location, carAdder, datePosted };
-        console.log(newCar)
+        // console.log(newCar)
         fetch('https://mh-renthub-server.vercel.app/allCars', {
             method: "POST",
             headers: {
@@ -29,7 +29,7 @@ const AddCar = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.insertedId) {
                     Swal.fire({
                         title: "Car Added Successfully!",

@@ -11,7 +11,7 @@ const BookingUpdate = () => {
         const form = e.target;
         const bookingDate = form.bookingDate.value;
         const bookingUpdate = { bookingDate };
-        console.log(bookingUpdate)
+        // console.log(bookingUpdate)
         fetch(`https://mh-renthub-server.vercel.app/myBookings/${_id}`, {
             method: "PUT",
             headers: {
@@ -21,7 +21,7 @@ const BookingUpdate = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.modifiedCount) {
                     Swal.fire({
                         title: "Booking Successful!",

@@ -8,7 +8,7 @@ const Login = () => {
     const { googleVerify, signInUser } = useContext(AuthContext)
     const navigate = useNavigate();
     const location=useLocation();
-    console.log('sign in ',location)
+    // console.log('sign in ',location)
     const from=location.state||'/';
     const handleGoogleRegister = async () => {
         try {
@@ -33,10 +33,10 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        // console.log(email, password)
         signInUser(email, password)
             .then(result => {
-                console.log(result.user)
+                // console.log(result.user)
                 if (result.user.providerId) {
                     Swal.fire({
                         title: "Successfully Logged In!",
@@ -47,7 +47,7 @@ const Login = () => {
                 navigate(from)
             })
             .catch(error => {
-                console.log("ERROR", error.message)
+                // console.log("ERROR", error.message)
                 if (error) {
                     Swal.fire({
                         icon: "error",

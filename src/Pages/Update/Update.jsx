@@ -24,7 +24,7 @@ const Update = () => {
         const carAdder = user.email;
         const datePosted = form.datePosted.value;
         const updatedCar = { model, price, available, registration_number, features, description, booking_count, image, location, carAdder, datePosted };
-        console.log(updatedCar)
+        // console.log(updatedCar)
         fetch(`https://mh-renthub-server.vercel.app/myCars/${_id}`, {
             method: "PUT",
             headers: {
@@ -34,7 +34,7 @@ const Update = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data.modifiedCount > 0) {
                     Swal.fire({
                         title: "Car Updated Successfully!",

@@ -45,7 +45,7 @@ const Register = () => {
 
         createUser(email, password)
             .then(result => {
-                console.log(result.user)
+                // console.log(result.user)
                 if (result.user.providerId) {
                     Swal.fire({
                         title: "Successfully Register!",
@@ -56,7 +56,7 @@ const Register = () => {
                 navigate('/login')
             })
             .catch(error => {
-                console.log("ERROR", error.message)
+                // console.log("ERROR", error.message)
                 if (error) {
                     Swal.fire({
                         icon: "error",
