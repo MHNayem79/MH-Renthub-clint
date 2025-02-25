@@ -25,7 +25,7 @@ const Update = () => {
         const datePosted = form.datePosted.value;
         const updatedCar = { model, price, available, registration_number, features, description, booking_count, image, location, carAdder, datePosted };
         console.log(updatedCar)
-        fetch(`http://localhost:5000/myCars/${_id}`, {
+        fetch(`https://mh-renthub-server.vercel.app/myCars/${_id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"

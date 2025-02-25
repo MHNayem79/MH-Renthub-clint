@@ -19,7 +19,7 @@ const MyBookings = () => {
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myBookings?email=${user.email}`)
+        fetch(`https://mh-renthub-server.vercel.app/myBookings?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setBookings(data);

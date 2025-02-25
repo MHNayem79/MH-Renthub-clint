@@ -12,7 +12,7 @@ const BookingUpdate = () => {
         const bookingDate = form.bookingDate.value;
         const bookingUpdate = { bookingDate };
         console.log(bookingUpdate)
-        fetch(`http://localhost:5000/myBookings/${_id}`, {
+        fetch(`https://mh-renthub-server.vercel.app/myBookings/${_id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"

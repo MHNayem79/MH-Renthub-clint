@@ -9,7 +9,7 @@ const MyCars = () => {
     const [myCars, setMyCars] = useState([]);
     const [sortType, setSortType] = useState("");
     useEffect(() => {
-        fetch(`http://localhost:5000/myCars?email=${user.email}`)
+        fetch(`https://mh-renthub-server.vercel.app/myCars?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setMyCars(data)
@@ -46,7 +46,7 @@ const MyCars = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/myCars/${_id}`, {
+                fetch(`https://mh-renthub-server.vercel.app/myCars/${_id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

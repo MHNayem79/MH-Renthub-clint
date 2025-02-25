@@ -10,7 +10,7 @@ const AvailableCars = () => {
 
     // Fetch car data from the backend
     useEffect(() => {
-        fetch('http://localhost:5000/allCars')
+        fetch('https://mh-renthub-server.vercel.app/allCars')
             .then((res) => res.json())
             .then((data) => {
                 setAvailableCars(data);

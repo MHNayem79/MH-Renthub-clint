@@ -32,12 +32,12 @@ const router = createBrowserRouter([
             {
                 path: '/update/:id',
                 element: <PrivateRouter><Update></Update></PrivateRouter>,
-                loader: ({ params }) => fetch(`http://localhost:5000/myCars/${params.id}`)
+                loader: ({ params }) => fetch(`https://mh-renthub-server.vercel.app/myCars/${params.id}`)
             },
             {
                 path: 'carDetails/:id',
                 element: <PrivateRouter><CarDetails></CarDetails></PrivateRouter>,
-                loader: ({ params }) => fetch(`http://localhost:5000/allCars/${params.id}`)
+                loader: ({ params }) => fetch(`https://mh-renthub-server.vercel.app/allCars/${params.id}`)
             },
             {
                 path: 'addCar',
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
             {
                 path: 'bookingUpdate/:id',
                 element: <PrivateRouter><BookingUpdate></BookingUpdate></PrivateRouter>,
-                loader:({params})=>fetch(`http://localhost:5000/myBookings/${params.id}`)
+                loader:({params})=>fetch(`https://mh-renthub-server.vercel.app/myBookings/${params.id}`)
             },
             {
                 path: 'myBookings',

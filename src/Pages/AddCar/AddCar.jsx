@@ -20,7 +20,7 @@ const AddCar = () => {
         const datePosted = form.datePosted.value;
         const newCar = { model, price, available, registration_number, features, description, booking_count, image, location, carAdder, datePosted };
         console.log(newCar)
-        fetch('http://localhost:5000/allCars', {
+        fetch('https://mh-renthub-server.vercel.app/allCars', {
             method: "POST",
             headers: {
                 "content-type": "application/json"

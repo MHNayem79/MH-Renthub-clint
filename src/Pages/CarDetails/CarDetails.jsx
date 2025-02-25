@@ -25,7 +25,7 @@ const CarDetails = () => {
             bookingMaker:email
         };
         console.log(bookingData)
-        fetch('http://localhost:5000/myBookings', {
+        fetch('https://mh-renthub-server.vercel.app/myBookings', {
             method: "POST",
             headers: {
                 "content-type": "application/json"

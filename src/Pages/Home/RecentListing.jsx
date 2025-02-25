@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const RecentListing = () => {
     const [recentCars, setRecentCars] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/cars')
+        fetch('https://mh-renthub-server.vercel.app/cars')
             .then(res => res.json())
             .then(data => {
                 setRecentCars(data)
